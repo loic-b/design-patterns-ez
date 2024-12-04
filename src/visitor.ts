@@ -1,19 +1,28 @@
-export function setupVisitor(element: HTMLDivElement) {
-  element.innerHTML = `
+/**
+ * Setup the visitor elements
+ * 
+ * @param contentElement The main div where to write specific content
+ * @param infoElement An coomon div that contain generic element to dispay the design pattern info (goal, pros, cons, ...)
+ */
+export function setupVisitor(contentElement: HTMLDivElement, infoElement: Node) {
+  // setup the specific element
+  contentElement.innerHTML = `
     <h2>Visitor</h2>
     <h3>Behavioral design pattern</h3>
-    
-    <!-- <p id="p"></p> -->
   `;
 
-  // const p = document.querySelector<HTMLParagraphElement>('#p');
-  // p!.innerHTML = "this is the 'p' content";
+  // add the common element
+  contentElement.appendChild(infoElement)
+
+  // use the DP
+  use()
 }
 
 // -------------------------------------------------------
 // interfaces visitor/element
 // -------------------------------------------------------
 
+/** define the visitor interface */
 interface IStateVisitor {
   get name(): string;
   visit(state: IStateElement): void;
@@ -21,6 +30,7 @@ interface IStateVisitor {
   // note: several visit methods can be defined, allowing the visited elements to choose the appropriate method for the visit
 }
 
+/** define the visitable element interface */
 interface IStateElement {
   get name(): string;
   accept(visitor: IStateVisitor): void;
@@ -93,19 +103,20 @@ class BarVisitor implements IStateVisitor {
 // -------------------------------------------------------
 // usage
 // -------------------------------------------------------
+function use() {
+  const states = [new ZeroAnalyzerState(), new OxydeState(), new PurgeState()];
+  const fooVisitor = new FooVisitor();
+  const barVisitor = new BarVisitor();
 
-const states = [new ZeroAnalyzerState(), new OxydeState(), new PurgeState()];
-const fooVisitor = new FooVisitor();
-const barVisitor = new BarVisitor();
+  // visit all state elements
+  console.group('visit all state elements');
+  for (const state of states) {
+    state.accept(fooVisitor);
+  }
+  console.groupEnd();
 
-// visit all state elements
-console.group('visit all state elements');
-for (const state of states) {
-  state.accept(fooVisitor);
+  // visit one state element
+  console.group('visit state element no.1');
+  states[1].accept(barVisitor);
+  console.groupEnd();
 }
-console.groupEnd();
-
-// visit one state element
-console.group('visit state element no.1');
-states[1].accept(barVisitor);
-console.groupEnd();
