@@ -15,31 +15,38 @@
 
   <!-- template for reporting design pattern infos (pros, cons, note, ...) -->
   <template id="template">
-    <div>
-      <!-- DP info: goal -->
-      <label>Goal</label>
-      <ul id="goal">
-        <li>goal one</li>
-        <li>goal two</li>
-      </ul>
-    </div>
 
-    <!-- DP info: Pros -->
-    <div>
-      <label>Pros</label>
-      <ul>
-        <li>pros one</li>
-        <li>pros two</li>
-      </ul>
-    </div>
+    <!-- reporter container -->
+    <div id="dp-container">
 
-    <!-- DP info: Cons -->
-    <div>
-      <label>Cons</label>
-      <ul>
-        <li>cons one</li>
-        <li>cons two</li>
-      </ul>
+      <!-- DP headers -->
+      <h2>Pattern name</h2>
+      <h3>Pattern type</h3>
+
+      <!-- DP info container -->
+      <div id="dp-info">
+
+        <!-- DP info: goal -->
+        <div id="goals" class="dp-info">
+          <label>Goals:</label>
+          <ul id="ul-goals">
+          </ul>
+        </div>
+
+        <!-- DP info: Pros -->
+        <div id="pros" class="dp-info">
+          <label>Pros:</label>
+          <ul id="ul-pros">
+          </ul>
+        </div>
+
+        <!-- DP info: Cons -->
+        <div id="cons" class="dp-info">
+          <label>Cons:</label>
+          <ul id="ul-cons">
+          </ul>
+        </div>
+      </div>
     </div>
   </template>
 

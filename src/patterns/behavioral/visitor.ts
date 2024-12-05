@@ -1,21 +1,20 @@
+import { IPatternReporter } from "../../main";
+
 /**
  * Setup the visitor elements
  * 
  * @param contentElement The main div where to write specific content
  * @param infoElement An coomon div that contain generic element to dispay the design pattern info (goal, pros, cons, ...)
  */
-export function setupVisitor(contentElement: HTMLDivElement, infoElement: Node) {
-  // setup the specific element
-  contentElement.innerHTML = `
-    <h2>Visitor</h2>
-    <h3>Behavioral design pattern</h3>
-  `;
+export function setupVisitor(reporter: IPatternReporter) {
+  reporter.patternName = 'Visitor'
+  reporter.patternType = 'Behavior'
+  reporter.addGoal('Separate an algorithm from the object structure it operates on')
+  reporter.addPros('Add new operations to existing objects without modifying them')
+  reporter.addPros('Perform operations on a group of similar objects and keep the operational logic separate from the objects')
+  reporter.addCons('a cons')
 
-  // add the common element
-  contentElement.appendChild(infoElement)
-
-  // use the DP
-  use()
+  run(reporter)
 }
 
 // -------------------------------------------------------
@@ -103,7 +102,9 @@ class BarVisitor implements IStateVisitor {
 // -------------------------------------------------------
 // usage
 // -------------------------------------------------------
-function use() {
+function run(reporter: IPatternReporter) {
+  console.log('visitor: run');
+
   const states = [new ZeroAnalyzerState(), new OxydeState(), new PurgeState()];
   const fooVisitor = new FooVisitor();
   const barVisitor = new BarVisitor();
